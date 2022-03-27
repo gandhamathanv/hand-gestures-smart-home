@@ -21,7 +21,7 @@ def detection(image):
         for landmark in hand_landmarks.landmark:
             landmark_x = int(landmark.x * height)
             landmark_y = int(landmark.y * width)
-            landmarks += [landmark_x, landmark_y]
+            landmarks.append([landmark_x, landmark_y])
         
         mp_draw.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
     
