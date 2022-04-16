@@ -2,7 +2,6 @@ import mediapipe as mp
 
 import os
 import pyheif
-import copy
 from PIL import Image
 
 
@@ -30,11 +29,8 @@ def mkdir_if_not_exists(path):
 
 
 def normalize(landmarks):
-    temp_landmarks = copy.deepcopy(landmarks)
-    for i, landmark in enumerate(landmarks):
-        if i == 0:
-            base_x, base_y = landmark[0], landmark[1]
-        temp_landmarks[i][0] -= base_x
-        temp_landmarks[i][1] -= base_y
-    return temp_landmarks
-    
+    base_x, base_y = landmarks[0][0], landmarks[0][1]
+    landmarks = [[landmark[0] - base_x, landmark[1] - base_y] for landmark in landmarks]
+    max_value = max([max([abs(x) for x in landmark]) for landmark in landmarks])
+    landmarks = [[landmark[0] / max_value, landmark[1] / max_value] for landmark in landmarks]
+    return landmarks
