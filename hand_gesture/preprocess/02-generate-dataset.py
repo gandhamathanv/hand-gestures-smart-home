@@ -6,7 +6,6 @@ sys.path.append(project_dir)
 
 import pickle
 import json
-import copy
 from sklearn.model_selection import train_test_split
 
 from hand_gesture import normalize
