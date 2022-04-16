@@ -17,4 +17,4 @@ scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer=optimizer, gamma=ga
 
 trainer = Trainer(criterion=criterion, optimizer=optimizer, scheduler=scheduler)
 trainer.train(model=model, train_dataloader=train_dataloader, val_dataloader=val_dataloader,
-              epochs=epochs, save_weights_path='./hand_gesture/weights/model.pt')
+              epochs=epochs, save_weights_path='./hand_gesture/weights/model_norm.pt')
