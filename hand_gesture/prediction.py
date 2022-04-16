@@ -22,6 +22,7 @@ model.eval()
 def hand_gesture_inference(image):
     landmarks, image = detection(image=image)
     action = None
+    value = 0
     if landmarks != []:
         landmarks = normalize(landmarks=landmarks)
         logits = hand_gesture_predict(landmarks=landmarks)
@@ -31,9 +32,8 @@ def hand_gesture_inference(image):
         if value >= confidence_threshold:
             action = class_names[index]
             print(action)
-    return image, action
+    return image, action, value
     
-
 
 def detection(image):
     height, width, _ = image.shape
