@@ -14,10 +14,14 @@ while True:
     frame = cv2.flip(frame, 1)
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-    image, action = hand_gesture_inference(image=frame_rgb)
+    image, action, confidence = hand_gesture_inference(image=frame_rgb)
 
-    cv2.putText(image, action, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 
-                1, (0,0,255), 2, cv2.LINE_AA)
+    if action != None:
+        cv2.rectangle(image, (5, 20), (340, 85), (255, 255, 255), -1)
+        cv2.putText(image, action, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 
+                    1, (0, 0, 255), 2, cv2.LINE_AA)
+        cv2.putText(image, f'confidence: {confidence:.4f}', (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 
+                    0.5, (0, 0, 255), 1, cv2.LINE_AA)
 
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     cv2.imshow('Output', image) 
