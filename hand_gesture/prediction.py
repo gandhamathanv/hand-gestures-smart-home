@@ -1,11 +1,38 @@
 import mediapipe as mp
 
+import torch
+
 import cv2
+import numpy as np
+
+from hand_gesture.model import HandGestureModel
+from hand_gesture.utils import normalize
+from hand_gesture.config import class_names, confidence_threshold
 
 
 mp_hands       = mp.solutions.hands
 hand_detection = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.7)
 mp_draw        = mp.solutions.drawing_utils
+
+model = HandGestureModel()
+model.load_state_dict(torch.load('./hand_gesture/weights/model.pt'))
+model.eval()
+
+
+def hand_gesture_inference(image):
+    landmarks, image = detection(image=image)
+    action = None
+    if landmarks != []:
+        landmarks = normalize(landmarks=landmarks)
+        logits = hand_gesture_predict(landmarks=landmarks)
+        print(logits)
+        values, indices = logits.topk(1, dim=1)
+        value, index = values.item(), indices.item()
+        if value >= confidence_threshold:
+            action = class_names[index]
+            print(action)
+    return image, action
+    
 
 
 def detection(image):
@@ -26,6 +53,14 @@ def detection(image):
         mp_draw.draw_landmarks(image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
     
     return landmarks, image
+
+
+def hand_gesture_predict(landmarks):
+    with torch.no_grad():
+        landmarks = np.array([landmarks], dtype=np.float32)
+        landmarks = torch.tensor(landmarks)
+        logits = model(landmarks)
+    return logits
 
 
 if __name__ == '__main__':
