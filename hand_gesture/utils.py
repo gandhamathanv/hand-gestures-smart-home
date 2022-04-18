@@ -30,7 +30,10 @@ def mkdir_if_not_exists(path):
 
 def normalize(landmarks):
     base_x, base_y = landmarks[0][0], landmarks[0][1]
-    landmarks = [[landmark[0] - base_x, landmark[1] - base_y] for landmark in landmarks]
-    max_value = max([max([abs(x) for x in landmark]) for landmark in landmarks])
-    landmarks = [[landmark[0] / max_value, landmark[1] / max_value] for landmark in landmarks]
+    landmarks = [[landmark[0] - base_x, landmark[1] - base_y] 
+                  for landmark in landmarks]
+    max_value = max([max([abs(x) for x in landmark]) 
+                  for landmark in landmarks])
+    landmarks = [[landmark[0] / max_value, landmark[1] / max_value] 
+                  for landmark in landmarks]
     return landmarks
