@@ -5,8 +5,8 @@ widths = [205, 325, 335, 235, 300, 240]
 data_path = './data/dataset.json'
 
 batch_size = 4
-lr=0.0001
-epochs=1000
+lr = 0.0001
+epochs = 1000
 gamma = 0.97
 
-confidence_threshold = 0.95
+confidence_threshold = 0.92
