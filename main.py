@@ -5,6 +5,8 @@ from hand_gesture.prediction import hand_gesture_inference
 from hand_gesture.config import class_names_to_idx, widths
 from config import time_interval
 
+from api.light import light_action
+
 
 print('Initializing webcam...')
 cv2.namedWindow("preview")
@@ -28,6 +30,7 @@ while True:
             number_of_time = datetime.now()  -  start_time_action
             number_of_time = number_of_time.total_seconds() 
             if number_of_time > time_interval:
+                light_action(state)
                 print(state)
                 state = None
         idx = class_names_to_idx[action]
