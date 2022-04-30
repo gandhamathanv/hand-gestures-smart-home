@@ -4,9 +4,11 @@ widths = [205, 325, 335, 235, 300, 240]
 
 data_path = './data/dataset.json'
 
-batch_size = 4
+model_dir = './hand_gesture/models'
+
+batch_size = 32
 lr = 0.0001
-epochs = 1000
+epochs = 100
 gamma = 0.97
 
-confidence_threshold = 0.92
+confidence_threshold = 0.999
