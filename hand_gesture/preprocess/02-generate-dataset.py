@@ -15,7 +15,7 @@ data_directory = 'data'
 image_directory = os.path.join(data_directory, 'image')
 keypoint_directory = os.path.join(data_directory, 'keypoint')
 
-image_types = ['only-hand'] # only-hand, include-body
+image_types = ['only-hand-fix'] # only-hand, include-body
 
 X = []
 y = []
@@ -39,7 +39,7 @@ for action in os.listdir(keypoint_directory):
             y.append(action)
 
 random_state = 32
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, 
                                                     random_state=random_state,
                                                     stratify=y)
 
