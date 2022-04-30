@@ -22,7 +22,7 @@ train_dataloader, val_dataloader = get_dataloader(data_path=data_path, batch_siz
 
 model = HandGestureModel()
 
-criterion = nn.BCELoss() # CrossEntropyLoss, BCELoss
+criterion = nn.BCELoss()
 optimizer = torch.optim.Adam(params=model.parameters(), lr=lr)
 scheduler = torch.optim.lr_scheduler.ExponentialLR(optimizer=optimizer, gamma=gamma)
 
