@@ -2,6 +2,7 @@ import mediapipe as mp
 
 import os
 import pyheif
+import matplotlib.pyplot as plt
 from PIL import Image
 
 
@@ -37,3 +38,15 @@ def normalize(landmarks):
     landmarks = [[landmark[0] / max_value, landmark[1] / max_value] 
                   for landmark in landmarks]
     return landmarks
+
+
+def plot(train_data, val_data, name, save_dir):
+    with plt.style.context('seaborn-darkgrid'):
+        plt.figure(figsize=(10, 6), dpi=80)
+        plt.plot(train_data)
+        plt.plot(val_data)
+        plt.title(f'Model {name}')
+        plt.ylabel(name)
+        plt.xlabel('epoch')
+        plt.legend(['train', 'val'], loc='upper left')
+        plt.savefig(os.path.join(save_dir, f'{name}.jpg'))
