@@ -4,39 +4,48 @@ current_dir = os.path.dirname(os.path.realpath(__file__))
 project_dir = os.path.dirname(os.path.dirname(current_dir))
 sys.path.append(project_dir)
 
-import numpy as np
+import cv2
 import pickle
 from tqdm import tqdm
 
-from hand_gesture import load_image, detection, mkdir_if_not_exists
+from hand_gesture import detection, mkdir_if_not_exists
 
 
 data_directory = 'data'
 image_directory = os.path.join(data_directory, 'image')
 keypoint_directory = os.path.join(data_directory, 'keypoint')
+mkdir_if_not_exists(keypoint_directory)
 
-image_types = ['only-hand'] # only-hand, include-body
+video_types = ['only-hand-fix'] # only-hand, include-body
 
 for action in os.listdir(image_directory):
     mkdir_if_not_exists(os.path.join(keypoint_directory, action))
     if action.startswith('.'):
         continue
-    for image_type in image_types:
-        image_dir = os.path.join(image_directory, action, image_type)
-        pickle_dir = os.path.join(keypoint_directory, action, image_type)
+    for video_type in video_types:
+        video_dir = os.path.join(image_directory, action, video_type)
+        pickle_dir = os.path.join(keypoint_directory, action, video_type)
         mkdir_if_not_exists(pickle_dir)
-        print(f'action: {action} image_type: {image_type}')
-        for image_name in tqdm(os.listdir(image_dir)):
-            basename = image_name.split('.')[0]
-            image_path = os.path.join(image_dir, image_name)
-            pickle_path = os.path.join(pickle_dir, f'{basename}.pkl')
-            if os.path.exists(pickle_path):
+        print(f'action: {action} video_type: {video_type}')
+        for file in tqdm(os.listdir(video_dir)):
+            if file.startswith('.'):
                 continue
+            basename = file.split('.')[0]
 
-            image = load_image(image_path=image_path)
-            image = np.array(image)
+            video_path = os.path.join(video_dir, file)
+            video = cv2.VideoCapture(video_path)
 
-            landmarks, _ = detection(image=image)
+            success, frame = video.read()
+            n_frame = 0
+            while success:
+                pickle_path = os.path.join(pickle_dir, f'{basename}_{n_frame:04d}.pkl')
+                if not os.path.exists(pickle_path):
+                    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                    landmarks, _ = detection(image=frame_rgb)
 
-            with open(pickle_path, 'wb') as file:
-                pickle.dump(landmarks, file)
+                    pickle_path = os.path.join(pickle_dir, f'{basename}_{n_frame:04d}.pkl')
+                    with open(pickle_path, 'wb') as file:
+                        pickle.dump(landmarks, file)
+                
+                success, frame = video.read()
+                n_frame += 1

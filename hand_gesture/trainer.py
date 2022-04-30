@@ -2,15 +2,11 @@ import numpy as np
 from tqdm import tqdm
 
 import torch
-from torch import nn
+
+from utils import plot
 
 
 def accuracy(y_pred, y_true):
-    # y_pred = nn.functional.softmax(y_pred, dim=1)
-    # _, top_class = y_pred.topk(1, dim=1)
-    # equals = top_class == y_true.view(*top_class.shape)
-    # return torch.sum(equals.type(torch.FloatTensor))
-
     _, top_class = y_pred.topk(1, dim=1)
     _, y_true = y_true.topk(1, dim=1)
     equals = top_class == y_true.view(*top_class.shape)
@@ -60,12 +56,15 @@ class Trainer:
         
         return val_loss / len(dataloader), val_acc / len(dataloader.dataset)
 
-    def train(self, model, train_dataloader, val_dataloader, epochs, save_weights_path='./hand_gesture/weights/model.pt'):
+    def train(self, model, train_dataloader, val_dataloader, epochs, model_path, save_weights_path='./hand_gesture/weights/model.pt'):
         model.to(self.device)
 
         best_epoch = 0
         val_min_loss = np.Inf
         val_max_acc  = 0.0
+
+        train_loss_list, val_loss_list = [], []
+        train_acc_list, val_acc_list   = [], []
 
         try:
             for epoch in range(epochs):
@@ -88,9 +87,17 @@ class Trainer:
                 print('Epoch: {}'.format(epoch+1))
                 print('   train_loss: {:.6f} train_acc: {:.6f}'.format(train_loss, train_acc))
                 print('   val_loss  : {:.6f} val_acc  : {:.6f}'.format(val_loss, val_acc))
+                train_loss_list.append(train_loss)
+                val_loss_list.append(val_loss)
+                train_acc_list.append(train_acc)
+                val_acc_list.append(val_acc)
 
         except KeyboardInterrupt:
             pass
         
         print('\nThe best model is from epoch: {}'.format(best_epoch))
         print('   val_min_loss: {:.6f} val_max_acc: {:.6f}'.format(val_min_loss, val_max_acc))
+        plot(train_data=train_loss_list, val_data=val_loss_list,
+             name='loss', save_dir=model_path)
+        plot(train_data=train_acc_list, val_data=val_acc_list,
+             name='accuracy', save_dir=model_path)
