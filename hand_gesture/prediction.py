@@ -26,12 +26,10 @@ def hand_gesture_inference(image):
     if landmarks != []:
         landmarks = normalize(landmarks=landmarks)
         logits = hand_gesture_predict(landmarks=landmarks)
-        # print(logits)
         values, indices = logits.topk(1, dim=1)
         value, index = values.item(), indices.item()
         if value >= confidence_threshold:
             action = class_names[index]
-            # print(action)
     return image, action, value
     
 
@@ -62,9 +60,3 @@ def hand_gesture_predict(landmarks):
         logits = model(landmarks)
     return logits
 
-
-if __name__ == '__main__':
-    image = cv2.imread('/Users/chi/Downloads/ex2.jpg')
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    landmarks, result_image = detection(image)
-    print(landmarks)

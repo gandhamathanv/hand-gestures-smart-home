@@ -1,9 +1,9 @@
 import cv2
-from numpy import number
+from datetime import datetime  
 
 from hand_gesture.prediction import hand_gesture_inference
 from hand_gesture.config import class_names_to_idx, widths
-from datetime import datetime  
+from config import time_interval
 
 
 print('Initializing webcam...')
@@ -27,7 +27,7 @@ while True:
         else:
             number_of_time = datetime.now()  -  start_time_action
             number_of_time = number_of_time.total_seconds() 
-            if number_of_time > 3:
+            if number_of_time > time_interval:
                 print(state)
                 state = None
         idx = class_names_to_idx[action]
@@ -37,7 +37,7 @@ while True:
         cv2.putText(image, f'confidence: {confidence:.4f}', (10, 75), cv2.FONT_HERSHEY_SIMPLEX, 
                     0.5, (0, 0, 255), 1, cv2.LINE_AA)
     else: 
-        state= None 
+        state = action 
 
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     cv2.imshow('Output', image) 
