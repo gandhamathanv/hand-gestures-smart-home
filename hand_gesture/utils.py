@@ -1,9 +1,7 @@
 import mediapipe as mp
 
 import os
-import pyheif
 import matplotlib.pyplot as plt
-from PIL import Image
 
 
 def init_mediapipe():
@@ -12,16 +10,6 @@ def init_mediapipe():
     mp_draw  = mp.solutions.drawing_utils
 
     return mp_hands, hands, mp_draw
-
-
-def load_image(image_path):
-    extension = image_path.split('.')[-1]
-    if extension in ['heic', 'HEIC']:
-        heif_file = pyheif.read(image_path)
-        image = Image.frombytes(heif_file.mode, heif_file.size, heif_file.data, 'raw', heif_file.mode, heif_file.stride)
-    else:
-        image = Image.open(image_path)
-    return image
 
 
 def mkdir_if_not_exists(path):
