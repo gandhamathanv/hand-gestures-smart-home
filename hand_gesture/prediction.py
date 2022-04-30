@@ -26,12 +26,12 @@ def hand_gesture_inference(image):
     if landmarks != []:
         landmarks = normalize(landmarks=landmarks)
         logits = hand_gesture_predict(landmarks=landmarks)
-        print(logits)
+        # print(logits)
         values, indices = logits.topk(1, dim=1)
         value, index = values.item(), indices.item()
         if value >= confidence_threshold:
             action = class_names[index]
-            print(action)
+            # print(action)
     return image, action, value
     
 
