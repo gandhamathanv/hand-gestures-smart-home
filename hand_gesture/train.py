@@ -1,8 +1,8 @@
-import torch
-from torch import nn
-
 import os
 from datetime import datetime
+
+import torch
+from torch import nn
 
 from dataset import get_dataloader
 from model import HandGestureModel

@@ -1,9 +1,8 @@
+import numpy as np
+
 import mediapipe as mp
 
 import torch
-
-import cv2
-import numpy as np
 
 from hand_gesture.model import HandGestureModel
 from hand_gesture.utils import normalize
