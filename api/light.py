@@ -10,12 +10,13 @@ from random import randint
 from yeelight import Bulb
 from yeelight import RGBTransition
 from yeelight import Flow
+from config import bulb_ips
 
 from hand_gesture import class_names
 
 
-bulb1 = Bulb('192.168.1.71')
-bulb2 = Bulb('192.168.1.62')
+bulb1 = Bulb(bulb_ips[0])
+bulb2 = Bulb(bulb_ips[1])
 
 
 def toggle_light():
