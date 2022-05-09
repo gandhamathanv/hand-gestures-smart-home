@@ -84,7 +84,7 @@ Use two stages model
 
 - Hand Detection
 - Hand Gesture Recognition
-  ![Model Overview](./assets/model-overview.png)
+  <img src="./assets/model-overview.png" width="800">
 
 #### Hand Detection
 
