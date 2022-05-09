@@ -93,13 +93,14 @@ Use two stages model
 #### Hand Gesture Recognition
 
 - Data
-  - Collected by ourselves <br /> <br />
+  - Collected by ourselves
+  - Data distribution <br />
     <img src="./assets/data-count.png" width="500">
 - Model
 
   - Fully Connected Neural Network
 
-    - Input: Coordinate x, y of each key points
+    - Input: `Coordinate x, y of each key points`
       - Normalized by position and size <br /> <br />
         ```py
         def normalize(landmarks):
@@ -113,7 +114,7 @@ Use two stages model
             return landmarks
         ```
       - `[[x0, y0], [x1, y1], …, [x20, y20]]`
-    - Output: Action
+    - Output: `Action`
     - Model Architecture
 
       ```py
