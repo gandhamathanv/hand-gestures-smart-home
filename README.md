@@ -101,7 +101,7 @@ Use two stages model
   - Fully Connected Neural Network
 
     - Input: `Coordinate x, y of each key points`
-      - Normalized by position and size <br /> <br />
+      - Normalized by position and size <br />
         ```py
         def normalize(landmarks):
             base_x, base_y = landmarks[0][0], landmarks[0][1]
@@ -113,7 +113,7 @@ Use two stages model
                           for landmark in landmarks]
             return landmarks
         ```
-      - `[[x0, y0], [x1, y1], …, [x20, y20]]`
+      - Structure: `[[x0, y0], [x1, y1], …, [x20, y20]]`
     - Output: `Action`
     - Model Architecture
 
