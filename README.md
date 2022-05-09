@@ -113,7 +113,7 @@ Use two stages model
                           for landmark in landmarks]
             return landmarks
         ```
-      - Structure: `[[x0, y0], [x1, y1], …, [x20, y20]]`
+      - Structure: `[[x0, y0], [x1, y1], ..., [x20, y20]]`
     - Output: `Action`
     - Model Architecture
 
