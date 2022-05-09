@@ -83,7 +83,7 @@ From our researches we found two possible approaches for the work
 Use two stages model
 
 - Hand Detection
-- Hand Gesture Recognition
+- Hand Gesture Recognition <br />
   <img src="./assets/model-overview.png" width="800">
 
 #### Hand Detection
