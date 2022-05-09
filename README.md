@@ -203,21 +203,21 @@ Use two stages model
 
   <table>
     <tr>
-      <td> <img src="./assets/action-0.png" alt="1" height="200"> </td>
-      <td> <img src="./assets/action-1.png" alt="2" height="200"> </td>
-      <td> <img src="./assets/action-2.png" alt="3" height="200"> </td>
+      <td align="center"> <img src="./assets/action-0.png" alt="1" height="200"> </td>
+      <td align="center"> <img src="./assets/action-1.png" alt="2" height="200"> </td>
+      <td align="center"> <img src="./assets/action-2.png" alt="3" height="200"> </td>
     </tr> 
-      <td> Turn on / off (toggle) </td>
-      <td> Increase brightness </td>
-      <td> Decrease brightness </td>
+      <td align="center"> Turn on / off (toggle) </td>
+      <td align="center"> Increase brightness </td>
+      <td align="center"> Decrease brightness </td>
     <tr>
-      <td> <img src="./assets/action-3.png" alt="1" height="200"> </td>
-      <td> <img src="./assets/action-4.png" alt="2" height="200"> </td>
-      <td> <img src="./assets/action-5.png" alt="3" height="200"> </td>
+      <td align="center"> <img src="./assets/action-3.png" alt="1" height="200"> </td>
+      <td align="center"> <img src="./assets/action-4.png" alt="2" height="200"> </td>
+      <td align="center"> <img src="./assets/action-5.png" alt="3" height="200"> </td>
     </tr> 
-      <td> Temp (toggle) </td>
-      <td> Randomly pick </td>
-      <td> Disco </td>
+      <td align="center"> Temp (toggle) </td>
+      <td align="center"> Randomly pick </td>
+      <td align="center"> Disco </td>
   </table>
 
 ## Limitations and Future Work
