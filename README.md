@@ -93,7 +93,8 @@ Use two stages model
 #### Hand Gesture Recognition
 
 - Data
-  - Collected by ourselves
+  - Collected by ourselves <br /> <br />
+    <img src="./assets/data-count.png" width="500">
 - Model
 
   - Fully Connected Neural Network
