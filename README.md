@@ -162,7 +162,7 @@ Use two stages model
 #### Result
 
 - Model Training <br />
-  <img src="./hand_gesture/models/2022-04-30-0/loss.jpg" width="450"> <img src="./hand_gesture/models/2022-04-30-0/accuracy.jpg" width="450">
+  <img src="./hand_gesture/models/2022-04-30-0/loss.jpg" width="600"> <img src="./hand_gesture/models/2022-04-30-0/accuracy.jpg" width="600">
 - Model Evaluation
 
   - Classification Report
