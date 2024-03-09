@@ -29,7 +29,7 @@ def normalize(landmarks):
 
 
 def plot(train_data, val_data, name, save_dir):
-    with plt.style.context('seaborn-darkgrid'):
+    with plt.style.context('ggplot'):
         plt.figure(figsize=(10, 6), dpi=80)
         plt.plot(train_data)
         plt.plot(val_data)
