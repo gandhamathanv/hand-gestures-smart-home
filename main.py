@@ -30,7 +30,7 @@ while True:
             number_of_time = datetime.now()  -  start_time_action
             number_of_time = number_of_time.total_seconds() 
             if number_of_time > time_interval:
-                light_action(state)
+                light_action(state, number_of_time)
                 print(state)
                 state = None
         idx = class_names_to_idx[action]

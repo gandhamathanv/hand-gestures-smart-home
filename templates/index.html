@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Two Numbers</title>
+</head>
+<body>
+    <h1>Add Two Numbers</h1>
+    <form id="addForm">
+        <h1>Light <span id="light"></span></h1>
+        <br><br>
+        <h1>Fan <span id="fan"></span></h1>
+    </form>
+    <div id="result"></div>
+    <script>
+        setInterval(async ()=>{
+            const response = await fetch('/get_values', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+            const data = await response.json();
+            if (response.ok) {
+                console.log(`Result: ${data}`);
+                const {light, fan} = data;
+                document.getElementById('light').innerText = light
+                document.getElementById('fan').innerText = fan
+            } else {
+                document.getElementById('result').innerText = `Error: ${data.error}`;
+            }
+        },10)
+ 
+       </script>
+</body>
+</html>

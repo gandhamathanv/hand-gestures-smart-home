@@ -3,9 +3,11 @@ import sys
 current_dir = os.path.dirname(os.path.realpath(__file__))
 project_dir = os.path.dirname(current_dir)
 sys.path.append(project_dir)
-
+values_json_path = os.path.join(project_dir, 'value.json')
+print(values_json_path)
 import copy
 from random import randint
+import json
 
 from yeelight import Bulb
 from yeelight import RGBTransition
@@ -20,13 +22,31 @@ bulb2 = Bulb(bulb_ips[1])
 
 
 def toggle_light():
-    bulb1.toggle()
-    bulb2.toggle()
+    # Read the contents of the JSON file
+    with open(values_json_path, 'r') as file:
+        data = json.load(file)
+
+    # Make changes to the data
+    if data['light']==100:
+        data['light']=0
+    else:
+        data['light']=100
+
+    # Write the modified data back to the JSON file
+    with open(values_json_path, 'w') as file:
+        json.dump(data, file, indent=4)
 
 
-def increase_brightness():
-    bulb1.set_brightness(int(bulb1.get_properties()['bright']) + 20)
-    bulb2.set_brightness(int(bulb2.get_properties()['bright']) + 20)
+def increase_brightness(number_of_time):
+    # Read the contents of the JSON file
+    with open(values_json_path, 'r') as file:
+        data = json.load(file)
+
+    data['light']+=1*number_of_time
+
+    # Write the modified data back to the JSON file
+    with open(values_json_path, 'w') as file:
+        json.dump(data, file, indent=4)
 
 
 def decrease_brightness():
@@ -63,17 +83,17 @@ def disco_toggle():
         bulb2.set_color_temp(6000)
 
 
-def light_action(command):
+def light_action(command,number_of_time):
     if command == class_names[0]:
         toggle_light()
     if command == class_names[1]:
-        increase_brightness()
-    if command == class_names[2]:
-        decrease_brightness()
-    if command == class_names[3]:
-        toggle_color_temp()
-    if command == class_names[4]:
-        random_color()
-    if command == class_names[5]:
-        disco_toggle()
+        increase_brightness(number_of_time)
+    # if command == class_names[2]:
+    #     decrease_brightness()
+    # if command == class_names[3]:
+    #     toggle_color_temp()
+    # if command == class_names[4]:
+    #     random_color()
+    # if command == class_names[5]:
+    #     disco_toggle()
     
