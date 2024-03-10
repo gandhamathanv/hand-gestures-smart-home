@@ -7,9 +7,9 @@ data_path = './data/dataset.json'
 model_dir = './hand_gesture/models'
 
 
-batch_size = 1
+batch_size = 8
 lr = 0.0001
-epochs = 30
+epochs = 50
 gamma = 0.97
 
 confidence_threshold = 0.999
