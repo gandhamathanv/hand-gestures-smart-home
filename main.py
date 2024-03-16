@@ -31,7 +31,6 @@ while True:
             number_of_time = number_of_time.total_seconds() 
             if number_of_time > time_interval:
                 light_action(state, number_of_time)
-                print(state)
                 state = None
         idx = class_names_to_idx[action]
         cv2.rectangle(image, (5, 20), (widths[idx], 85), (255, 255, 255), -1)

@@ -14,7 +14,7 @@ hand_detection = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.7)
 mp_draw        = mp.solutions.drawing_utils
 
 model = HandGestureModel()
-model.load_state_dict(torch.load('./hand_gesture/models/2022-04-30-0/model.pt'))
+model.load_state_dict(torch.load('./hand_gesture/models/2024-03-16-0/model.pt'))
 model.eval()
 
 
@@ -27,6 +27,7 @@ def hand_gesture_inference(image):
         logits = hand_gesture_predict(landmarks=landmarks)
         values, indices = logits.topk(1, dim=1)
         value, index = values.item(), indices.item()
+        print(value, index, class_names)
         if value >= confidence_threshold:
             action = class_names[index]
     return image, action, value

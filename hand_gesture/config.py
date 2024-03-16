@@ -1,6 +1,6 @@
 class_names = ['turn_on', 'turn_off', 'fan_on', 'fan_off']
 class_names_to_idx = {class_name: i for i, class_name in enumerate(class_names)}
-widths = [205, 325, 335, 235, 300, 240]
+widths = [205, 325, 335, 235]
 
 data_path = './data/dataset.json'
 

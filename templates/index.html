@@ -3,16 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Two Numbers</title>
+    <style>
+        html {
+    overflow: hidden;
+    background-color: cadetblue;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.fan {
+    width: 500px;
+    height: 500px;
+    position: relative;
+    z-index: 1;
+}
+.fan-main {
+    position: absolute;
+    width: 200px;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.fan-main .bottom {
+    width: 200px;
+    height: 55px;
+    position: relative;
+    background: black;
+}
+
+.fan-main .bottom::after {
+    content: "";
+    position: absolute;
+    height: 50%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #ccc4;
+}
+
+.fan .head .green {
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    border-radius: 5px;
+    left: 30%;
+    background: #32ba7c;
+    cursor: pointer;
+    z-index: 1;
+    bottom: -35%;
+}
+
+.fan .head {
+    transition: 1s transform;
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    bottom: 195px;
+    left: calc(50% - 150px);
+}
+
+.fan .head .engine {
+    position: absolute;
+    top: 100px;
+    width: 100px;
+    height: 100px;
+    background: #2f423f;
+    border-radius: 50%;
+    left: 49%;
+    transform: translateX(-50%);
+}
+
+.fan-stand {
+    position: absolute;
+    bottom: 60px;
+    background: #111;
+    height: 270px;
+    width: 15px;
+    left: 50%;
+    z-index: -1;
+    transform: translateX(-50%);
+}
+
+.fan-blades {
+    width: 220px;
+    height: 220px;
+    position: absolute;
+    transition: 4s;
+    top: 13%;
+    left: calc(50% - 115px);
+    transform-origin: center center;
+    z-index: 1;
+    animation: start infinite 1s linear forwards;
+}
+
+.fan-blades .blade {
+    position: absolute;
+    width: 40px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    perspective: 500px;
+    transform-style: preserve-3d;
+}
+
+.fan-blades .blade:nth-child(2) {
+    transform: translateX(-50%) rotate(90deg);
+}
+.fan-blades .blade:nth-child(3) {
+    transform: translateX(-50%) rotate(180deg);
+}
+.fan-blades .blade:nth-child(4) {
+    transform: translateX(-50%) rotate(270deg);
+}
+
+.fan-blades .blade span {
+    width: 100%;
+    height: 200%;
+    border-radius: 44px;
+    background: #222;
+    position: absolute;
+    top: -66px;
+    display: block;
+    transform-style: preserve-3d;
+    transform: rotateX(78deg);
+    overflow: hidden;
+}
+
+.fan-blades .blade span::after {
+    width: 50%;
+    height: 100%;
+    content: "";
+    display: block;
+    background: #333;
+    transform: rotateX(0deg);
+}
+
+.fan-blades .center {
+    position: absolute;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: #ccc;
+    z-index: 2;
+}
+.fan-blades .center::after {
+    content: "";
+    width: 40px;
+    height: 20px;
+    background: #888;
+    display: block;
+}
+
+#start:checked + div > .fan-blades {
+    animation: off 0.5s ease-out forwards;
+}
+
+#start:checked + div > .green {
+    bottom: -36%;
+}
+
+#start:checked + div > .green:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background: #666;
+}
+
+@keyframes start {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(calc(360*10deg));
+    }
+}
+@keyframes off {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+
+:root {
+  --glow-color: hsl(186 100% 69%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.glowing-btn {
+  position: relative;
+  color: #000;
+  width: 16rem;
+  cursor: pointer;
+  padding: 0.35em 1em;
+  border: 0.15em solid #000;
+  border-radius: 0.45em;
+  background: none;
+  perspective: 2em;
+  font-size: 2em;
+  font-weight: 900;
+  letter-spacing: 1em;
+
+}
+
+.glowing-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  filter: blur(1em);
+  transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
+  background: var(--glow-color);
+  pointer-events: none;
+}
+
+.glowing-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  z-index: -1;
+  background-color: var(--glow-color);
+  box-shadow: 0 0 2em 0.2em var(--glow-color);
+  transition: opacity 100ms linear;
+}
+
+.glowing-btn.active {
+  color: rgba(0, 0, 0, 0.8);
+  text-shadow: none;
+  animation: none;
+  border: 0.15em solid var(--glow-color);
+
+  -webkit-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  -moz-box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  box-shadow: inset 0px 0px 0.5em 0px var(--glow-color),
+    0px 0px 0.5em 0px var(--glow-color);
+  animation: border-flicker 2s linear infinite;
+
+}
+
+.glowing-btn.active:before {
+  filter: blur(1.5em);
+  opacity: 1;
+}
+
+.glowing-btn.active:after {
+  opacity: 1;
+}
+
+    </style>
 </head>
 <body>
-    <h1>Add Two Numbers</h1>
-    <form id="addForm">
-        <h1>Light <span id="light"></span></h1>
-        <br><br>
-        <h1>Fan <span id="fan"></span></h1>
-    </form>
-    <div id="result"></div>
+    <div class="fan">
+        <div class="fan-main">
+            <div class="bottom"></div>
+        </div>
+    <div class="fan-stand"></div>
+
+    <div class="head">
+        <div class="engine">
+            <span class="center"></span>
+        </div>
+
+        <div class="fan-blades">
+            <span class="center"></span>
+            <div class="blade"><span></span></div>
+            <div class="blade"><span></span></div>
+            <div class="blade"><span></span></div>
+            <div class="blade"><span></span></div>
+        </div>
+    </div>
+    </div>
+    <button class='glowing-btn'><span class='glowing-txt'>ON</span></button>
     <script>
         setInterval(async ()=>{
             const response = await fetch('/get_values', {

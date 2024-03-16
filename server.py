@@ -4,6 +4,9 @@ import json
 
 app = Flask(__name__)
 
+FAN_SPEED = 0
+LIGHT_STATUS = True
+
 # Serve HTML file
 @app.route('/')
 def index():
@@ -13,10 +16,11 @@ def index():
 @app.route('/get_values', methods=['POST'])
 def add_numbers():
     try:
-        values_file_path = os.path.join(os.path.dirname(__file__), 'value.json')
-        print(values_file_path)
         with open(values_file_path) as json_file:
-            data = json.load(json_file)
+            data = {
+                fan: FAN_SPEED,
+                light: LIGHT_STATUS
+            }
             return jsonify(data)
     except FileNotFoundError:
         return jsonify({'error': 'values.json file not found'}), 404

@@ -16,7 +16,7 @@ image_directory = os.path.join(data_directory, 'image')
 keypoint_directory = os.path.join(data_directory, 'keypoint')
 mkdir_if_not_exists(keypoint_directory)
 
-video_types = ['only-hand-fix'] # only-hand, include-body
+video_types = ['only-hand-fix',"include-body"] # only-hand, include-body
 
 for action in os.listdir(image_directory):
     mkdir_if_not_exists(os.path.join(keypoint_directory, action))
