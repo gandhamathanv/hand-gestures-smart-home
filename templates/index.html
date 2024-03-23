@@ -99,6 +99,9 @@ body {
     left: calc(50% - 115px);
     transform-origin: center center;
     z-index: 1;
+}
+
+.fan-blades.active {
     animation: start infinite 1s linear forwards;
 }
 
@@ -309,17 +312,25 @@ body {
                     'Content-Type': 'application/json'
                 },
             });
-            const data = await response.json();
-            if (response.ok) {
-                console.log(`Result: ${data}`);
-                const {light, fan} = data;
-                document.getElementById('light').innerText = light
-                document.getElementById('fan').innerText = fan
-            } else {
-                document.getElementById('result').innerText = `Error: ${data.error}`;
-            }
-        },10)
- 
+            const data = await response.json().then((data)=>{
+                const {fan , light} = data;
+                console.log(data)
+                if (light===true){
+                    document.getElementsByClassName("glowing-btn")[0].classList.add("active")
+                    document.getElementsByClassName("glowing-txt")[0].innerText="ON"
+                }
+                else{
+                    document.getElementsByClassName("glowing-btn")[0].classList.remove("active")
+                    document.getElementsByClassName("glowing-txt")[0].innerText="OFF"
+                }
+                if (fan===true){
+                    document.getElementsByClassName("fan-blades")[0].classList.add("active")
+                }
+                else{
+                    document.getElementsByClassName("fan-blades")[0].classList.remove("active")
+                }
+            });
+        },1000)
        </script>
 </body>
 </html>

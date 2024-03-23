@@ -27,7 +27,6 @@ def hand_gesture_inference(image):
         logits = hand_gesture_predict(landmarks=landmarks)
         values, indices = logits.topk(1, dim=1)
         value, index = values.item(), indices.item()
-        print(value, index, class_names)
         if value >= confidence_threshold:
             action = class_names[index]
     return image, action, value

@@ -19,10 +19,7 @@ def turn_on():
         data = json.load(file)
 
     # Make changes to the data
-    if data['light']==100:
-        data['light']=0
-    else:
-        data['light']=100
+    data["light"]=True
 
     # Write the modified data back to the JSON file
     with open(values_json_path, 'w') as file:
@@ -34,21 +31,17 @@ def turn_off():
     with open(values_json_path, 'r') as file:
         data = json.load(file)
 
-    data['light']+=1*number_of_time
+    data["light"]=False
 
-    # Write the modified data back to the JSON file
     with open(values_json_path, 'w') as file:
         json.dump(data, file, indent=4)
 
 
 def increase_speed():
-    # Read the contents of the JSON file
     with open(values_json_path, 'r') as file:
         data = json.load(file)
-    if( data["fan"]<5):
-        data['fan']+=1
+    data["fan"]=True
 
-    # Write the modified data back to the JSON file
     with open(values_json_path, 'w') as file:
         json.dump(data, file, indent=4)
 
@@ -57,14 +50,15 @@ def decrease_speed():
     # Read the contents of the JSON file
     with open(values_json_path, 'r') as file:
         data = json.load(file)
-    if( data["fan"]>=0):
-        data['fan']-=1
+    data["fan"]=False
 
     # Write the modified data back to the JSON file
     with open(values_json_path, 'w') as file:
         json.dump(data, file, indent=4)
 
 def light_action(command,number_of_time):
+
+    print(command)
     if command == class_names[0]:
         turn_on()
     if command == class_names[1]:
